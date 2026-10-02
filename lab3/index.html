@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Конвертер довжини: міліметри, сантиметри, метри й кілометри з історією перетворень.">
+  <title>UnitLab — конвертер довжини</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="sr-only focus:not-sr-only focus:absolute focus:z-10 focus:bg-white focus:p-4" href="#main">Перейти до вмісту</a>
+  <header class="border-b border-line bg-white/70">
+    <div class="mx-auto flex max-w-screen-2xl flex-col gap-5 px-5 py-5 sm:px-8 md:flex-row md:items-center md:justify-between">
+      <a href="#" class="flex items-center gap-3 text-xl font-bold" aria-label="UnitLab — на початок">
+        <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand text-lg text-white" aria-hidden="true">↔</span> UnitLab
+      </a>
+      <nav aria-label="Головна навігація" class="flex flex-wrap gap-x-5 gap-y-3 text-sm font-medium text-muted">
+        <a class="hover:text-brand" href="#converter">Конвертер</a>
+        <a class="hover:text-brand" href="#history">Історія</a>
+        <a class="hover:text-brand" href="#units">Одиниці</a>
+        <a class="hover:text-brand" href="#guide">Як це працює</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="mx-auto max-w-screen-2xl px-5 pb-12 pt-10 sm:px-8 sm:pt-14 wide:pt-18">
+    <div class="mb-9 max-w-2xl">
+      <p class="mb-3 text-xs font-bold uppercase tracking-widest text-brand">Від міліметра до кілометра</p>
+      <h1 class="mb-4 text-4xl font-bold leading-tight sm:text-5xl">Одна довжина.<br>Різні одиниці.</h1>
+      <p class="text-base leading-normal text-muted">Оберіть одиниці, дізнайтеся співвідношення та збережіть потрібні перетворення в одному місці.</p>
+    </div>
+    <div class="grid grid-cols-1 items-start gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <section id="converter" class="panel" aria-labelledby="converter-title">
+        <span class="section-number">01</span>
+        <h2 id="converter-title" class="mb-2 text-xl font-bold">Конвертер</h2>
+        <p class="mb-5 text-sm leading-relaxed text-muted">Введіть довжину та оберіть потрібні одиниці.</p>
+        <form id="converter-form" class="space-y-4" novalidate>
+          <div><label for="input-value" class="mb-2 block text-sm font-semibold">Значення</label><input id="input-value" class="field" type="text" inputmode="decimal" placeholder="Наприклад, 2,5" aria-describedby="input-hint error-message" required><p id="input-hint" class="mt-2 text-xs text-muted">Десяткова кома або крапка.</p></div>
+          <div><label for="from-unit" class="mb-2 block text-sm font-semibold">З одиниці</label><select id="from-unit" class="field"></select></div>
+          <div><label for="to-unit" class="mb-2 block text-sm font-semibold">В одиницю</label><select id="to-unit" class="field"></select></div>
+          <button id="swap-units" class="quiet-button w-full" type="button">Поміняти одиниці ↔</button>
+          <div><label for="result" class="mb-2 block text-sm font-semibold">Результат</label><input id="result" class="field bg-brand-light font-semibold" type="text" placeholder="Результат перетворення" readonly></div>
+          <p id="error-message" class="text-sm text-red-700" role="alert" hidden></p>
+          <button class="button w-full" type="submit">Перетворити</button>
+          <p id="conversion-status" class="sr-only" role="status" aria-live="polite"></p>
+        </form>
+        <noscript><p class="mt-4 text-sm text-red-700">Увімкніть JavaScript у браузері, щоб користуватися конвертером.</p></noscript>
+      </section>
+      <section id="history" class="panel" aria-labelledby="history-title">
+        <span class="section-number">02</span>
+        <h2 id="history-title" class="mb-2 text-xl font-bold">Історія</h2>
+        <p class="mb-4 text-sm leading-relaxed text-muted">Ваші перетворення в цій сесії.</p>
+        <div class="mb-5 flex flex-wrap items-center justify-between gap-3"><p class="text-sm text-muted">Записів: <strong id="history-count" class="text-ink">0</strong></p><button id="clear-history" class="quiet-button disabled:cursor-not-allowed disabled:opacity-50" type="button" disabled>Очистити</button></div>
+        <p id="empty-history" class="rounded-xl bg-canvas p-5 text-sm leading-relaxed text-muted">Історія поки порожня. Перше перетворення з’явиться тут.</p>
+        <ul id="history-list" class="max-h-96 space-y-3 overflow-y-auto" aria-label="Історія перетворень"></ul>
+        <p id="history-status" class="sr-only" role="status" aria-live="polite"></p>
+      </section>
+      <section id="units" class="panel" aria-labelledby="units-title">
+        <span class="section-number">03</span>
+        <h2 id="units-title" class="mb-2 text-xl font-bold">Одиниці довжини</h2>
+        <p class="mb-5 text-sm leading-relaxed text-muted">Усі коефіцієнти відносно одного метра.</p>
+        <table class="w-full text-left text-sm"><caption class="sr-only">Співвідношення одиниць довжини</caption><thead><tr class="border-b border-line text-muted"><th scope="col" class="pb-3">Одиниця</th><th scope="col" class="pb-3 text-right">У метрах</th></tr></thead><tbody class="divide-y divide-line"><tr><th scope="row" class="py-4 font-medium">Міліметр</th><td class="py-4 text-right">0,001</td></tr><tr><th scope="row" class="py-4 font-medium">Сантиметр</th><td class="py-4 text-right">0,01</td></tr><tr><th scope="row" class="py-4 font-medium">Метр</th><td class="py-4 text-right">1</td></tr><tr><th scope="row" class="py-4 font-medium">Кілометр</th><td class="py-4 text-right">1 000</td></tr></tbody></table>
+        <p class="mt-5 rounded-xl bg-brand-light p-4 text-sm leading-relaxed">Перетворення змінює запис величини, а її фізична довжина залишається тією самою.</p>
+      </section>
+      <section id="guide" class="panel" aria-labelledby="guide-title">
+        <span class="section-number">04</span>
+        <h2 id="guide-title" class="mb-2 text-xl font-bold">Як це працює</h2>
+        <p class="mb-5 text-sm leading-relaxed text-muted">Два прості кроки через базову одиницю.</p>
+        <img class="mb-5 w-full rounded-xl" src="assets/measure.svg" alt="Лінійка та співвідношення: один метр дорівнює ста сантиметрам" width="400" height="220">
+        <ol class="space-y-3 text-sm leading-relaxed text-muted"><li><strong class="text-ink">1. Перевести в метри.</strong><br>Помножте значення на коефіцієнт початкової одиниці.</li><li><strong class="text-ink">2. Перевести в нову одиницю.</strong><br>Поділіть на коефіцієнт кінцевої одиниці.</li></ol>
+        <a class="quiet-button mt-6 w-full" href="#converter">До конвертера ↑</a>
+      </section>
+    </div>
+  </main>
+  <footer class="border-t border-line px-5 py-6 sm:px-8"><div class="mx-auto flex max-w-screen-2xl flex-col gap-3 text-sm text-muted sm:flex-row sm:justify-between"><p>UnitLab · Рибчинський Б.І. · ІПЗм-41</p><a class="font-medium text-brand hover:underline" href="https://github.com/MyKa322">Контакт: MyKa322 на GitHub ↗</a></div></footer>
+</body>
+</html>

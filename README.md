@@ -28,3 +28,27 @@ git log --oneline --graph --all
 ```
 
 Документація: [Git](https://git-scm.com/doc), [Markdown](https://docs.github.com/en/get-started/writing-on-github).
+
+## Лабораторні роботи 2 і 3
+
+Номер студента у списку групи — **11**, відповідний варіант — **3**.
+
+| Робота | Результат | Гілка |
+| --- | --- | --- |
+| 1 | Історія Git, гілки, злиття та GitHub | [тег lab-1](https://github.com/MyKa322/web-development-labs/tree/lab-1) |
+| 2 | Чотири адаптивні секції з Tailwind CSS | [lab-2](https://github.com/MyKa322/web-development-labs/tree/lab-2) |
+| 3 | Конвертер довжини та історія операцій | [lab-3](https://github.com/MyKa322/web-development-labs/tree/lab-3) |
+
+```powershell
+npm ci
+npm run build
+npm start
+```
+
+Відкрити [макет](http://127.0.0.1:4173/lab2/) або
+[конвертер](http://127.0.0.1:4173/lab3/). Також можна відкрити HTML-файли напряму:
+зібраний CSS та всі зображення локальні, CDN не використовується.
+
+`npm test` запускає п’ять браузерних тестів у Microsoft Edge. Перевіряються всі
+16 пар одиниць, історія, валідація та адаптивні макети від 320 до 1440 px.
+Докладніше: [робота 2](lab2/README.md), [робота 3](lab3/README.md).

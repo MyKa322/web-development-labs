@@ -1,0 +1,15 @@
+{
+  "name": "web-development-labs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Лабораторні з основ веб-розробки, варіант 3",
+  "scripts": {
+    "build": "tailwindcss -i ./src/input.css -o ./lab2/styles.css --minify",
+    "dev": "tailwindcss -i ./src/input.css -o ./lab2/styles.css --watch",
+    "start": "node scripts/server.cjs",
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}

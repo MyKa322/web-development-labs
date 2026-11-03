@@ -52,3 +52,26 @@ npm start
 `npm test` запускає п’ять браузерних тестів у Microsoft Edge. Перевіряються всі
 16 пар одиниць, історія, валідація та адаптивні макети від 320 до 1440 px.
 Докладніше: [робота 2](lab2/README.md), [робота 3](lab3/README.md).
+
+## Лабораторні роботи 4–8
+
+| Робота | Результат | Варіант і гілка |
+| --- | --- | --- |
+| 4 | IIFE, масиви, Map, контекст і замикання | Варіант 3, [lab-4](https://github.com/MyKa322/web-development-labs/tree/lab-4) |
+| 5 | Паркінг з автомобілями, вантажівками й мотоциклами | Варіант 1, [lab-5](https://github.com/MyKa322/web-development-labs/tree/lab-5) |
+| 6 | Три консольні програми PHP | Завдання 1–3, [lab-6](https://github.com/MyKa322/web-development-labs/tree/lab-6) |
+| 7 | Журнал вимірювань, форма POST і MySQL | [lab-7](https://github.com/MyKa322/web-development-labs/tree/lab-7) |
+| 8 | Редагування й видалення, MVC, Singleton, Factory | [lab-8](https://github.com/MyKa322/web-development-labs/tree/lab-8) |
+
+Роботи №4–5 відкриваються через `npm start`. Для №6 потрібен PHP CLI; команди наведені
+в [lab6/README.md](lab6/README.md). Для №7–8 потрібен Apache з PHP 8.1 або новішим,
+розширеннями `pdo_mysql`, `mbstring` і MySQL. Імпортуйте `database/schema.sql`
+і передайте параметри з’єднання змінними середовища. Докладніше в
+[lab7/README.md](lab7/README.md) і [lab8/README.md](lab8/README.md).
+
+У поточному навчальному середовищі Apache доступний на `http://127.0.0.1:8088/`;
+Node-сервер перенаправляє сторінки №7–8 на цей порт. Сам Node не виконує PHP.
+Команда `npm run test:unit` перевіряє моделі JavaScript. Команда `php lab6/tests.php`
+виконує 26 перевірок консольних програм. Повний `npm test` містить 10 браузерних
+сценаріїв і потребує запущеного Apache та бази для №7–8. Якщо адреса інша,
+задайте `LAB_APP_URL` перед запуском тестів.
